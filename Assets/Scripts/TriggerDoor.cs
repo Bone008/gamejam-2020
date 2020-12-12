@@ -4,29 +4,19 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 
+//[RequireComponent(typeof(AudioSource))]
+
 public class TriggerDoor : MonoBehaviour
+
 {
-    void Start()
-    {
-        var myLoadedAssetBundle = AssetBundle.LoadFromFile(Path.Combine(Application.streamingAssetsPath, "myassetBundle"));
-        if (myLoadedAssetBundle == null)
-        {
-            Debug.Log("Failed to load AssetBundle!");
-            return;
-        }
-
-        var prefab = myLoadedAssetBundle.LoadAsset<GameObject>("MyObject");
-        Instantiate(prefab);
-
-        myLoadedAssetBundle.Unload(false);
-    }
-
-
-    void OnTriggerEnter(Collider doorInformation)
+    IEnumerator OnTriggerEnter(Collider doorInformation)
     {
         if (doorInformation.gameObject.name == "Player")
         {
             Debug.Log("Collision Detected");
+            AudioSource audio = GetComponent<AudioSource>();
+            audio.Play();
+            yield return new WaitForSeconds(audio.clip.length); // Wait for the audio to have finished
             SceneManager.LoadScene("TestLevel02", LoadSceneMode.Single); 
         }
     }

@@ -6,8 +6,17 @@ public class RenderPath : MonoBehaviour
 {
     private LineRenderer lineRenderer;
     private Transform waypointsRoot;
+    private float length;
+    private Vector3[] positions;
+    private Vector3 direction;
+    private Vector3 position;
+    private Quaternion rotation;
+    private int num = 0;
 
     public GameObject anchor;
+    public GameObject arrow;
+    //public int coverage = 1;
+    public float spawnDistance = 3f;
 
     void Start()
     {
@@ -36,11 +45,45 @@ public class RenderPath : MonoBehaviour
         {
             lineRenderer.loop = true;
         }
+
+        positions = new Vector3[lineRenderer.positionCount];
+        lineRenderer.GetPositions(positions);
+        // get length of path
+        length = CalculateLength(positions);
+        num = (int)((length / spawnDistance) - 1);
+        direction = positions[1] - positions[0];
+        position = waypointsRoot.transform.position;
+        rotation = Quaternion.LookRotation(direction);
+        arrow = (GameObject)Instantiate(arrow, position, rotation);
+        arrow.GetComponent<FollowPath>().waypointsRoot = this.waypointsRoot;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        float distance = Vector3.Distance(arrow.transform.position, position);
+        if (distance > spawnDistance && num > 0)
+        {
+            arrow = (GameObject)Instantiate(arrow, position, rotation);
+            arrow.GetComponent<FollowPath>().waypointsRoot = this.waypointsRoot;
+            num -= 1;
+        }
+    }
+
+    float CalculateLength(Vector3[] positions)
+    {
+        bool isLooping = anchor.GetComponent<FollowPath>().isLooping;
+        float length = 0.0f;
+        Vector3 prev = positions[0];
+        for (int i = 1; i < positions.Length; i++)
+        {
+            length += (positions[i] - prev).magnitude;
+            prev = positions[i];
+        }
+        if (isLooping)
+        {
+            length += (positions[0] - prev).magnitude;
+        }
+        return length;
     }
 }

@@ -799,7 +799,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   whatIsGrappleable:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1024
   gunTip: {fileID: 2223799618897717019}
   camera: {fileID: 2223799619314023897}
   player: {fileID: 2223799620444542383}
@@ -989,4 +989,4 @@ MonoBehaviour:
   maxSlopeAngle: 35
   slideForce: 400
   slideCounterMovement: 0.2
-  jumpForce: 220
+  jumpForce: 300

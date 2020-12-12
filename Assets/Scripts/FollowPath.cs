@@ -39,13 +39,13 @@ public class FollowPath : MonoBehaviour
         //rb.isKinematic = true;
         NextWaypoint();
 
-        if(initiallyTeleportToFirstWaypoint)
+        if (initiallyTeleportToFirstWaypoint)
         {
             transform.position = currentWaypoint.position;
         }
     }
 
-    void FixedUpdate()
+    void Update()
     {
         Vector3 currentGoal = currentWaypoint.position;
         transform.position = Vector3.MoveTowards(transform.position, currentGoal, Time.deltaTime * velocity);
@@ -53,9 +53,10 @@ public class FollowPath : MonoBehaviour
         if (isTurning)
         {
             Vector3 direction = currentGoal - transform.position;
-            transform.rotation = Quaternion.LookRotation(direction);
+            if (direction != Vector3.zero)
+                transform.rotation = Quaternion.LookRotation(direction);
         }
-        
+
 
         // We might do this instead to play nicer with the physics engine.
         // On its own, the player still wiggles around a bit while standing on a platform and falls off.

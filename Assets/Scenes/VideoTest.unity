@@ -1557,6 +1557,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 1766978759}
+  videos:
+  - {fileID: 32900000, guid: 2991b3f8def821c4f947da388095b3d4, type: 3}
+  - {fileID: 32900000, guid: 26867ca970ab0934eb1e7dcf1435f72e, type: 3}
+  - {fileID: 32900000, guid: 4bf4c90b7fad39c4cbb567113b2afda4, type: 3}
+  - {fileID: 32900000, guid: ec3dd7e67361bb14d95921b8b9447a77, type: 3}
+  - {fileID: 32900000, guid: 203c969876d3a5848aaa52900e0bc5d0, type: 3}
+  - {fileID: 32900000, guid: 0752d2da198b2554c93945328b59e41a, type: 3}
+  - {fileID: 32900000, guid: 6740ae333ae4cf7488cd3cc226401f45, type: 3}
+  - {fileID: 32900000, guid: 6b9f5774d28b67e4398249d8e6ccb41b, type: 3}
+  lengths: 03000000050000000b0000000800000005000000060000000500000003000000
 --- !u!1 &1950204796
 GameObject:
   m_ObjectHideFlags: 0

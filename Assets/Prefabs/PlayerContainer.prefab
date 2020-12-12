@@ -618,8 +618,8 @@ GameObject:
   - component: {fileID: 2223799619992103606}
   - component: {fileID: 2223799619992103607}
   - component: {fileID: 2223799619992103592}
-  - component: {fileID: 2223799619992103593}
   - component: {fileID: 2223799619992103594}
+  - component: {fileID: 2223799619992103593}
   m_Layer: 0
   m_Name: Gun
   m_TagString: Untagged
@@ -702,6 +702,28 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2223799619992103594
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2223799619992103596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ff3f422991e7f34eb9ffbccda51ef98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reelInSpeed: 10
+  whatIsGrappleable:
+    serializedVersion: 2
+    m_Bits: 1024
+  gunTip: {fileID: 2223799618897717019}
+  camera: {fileID: 2223799619314023897}
+  player: {fileID: 2223799620444542383}
+  audioSource: {fileID: 393477524}
+  successAudio: {fileID: 8300000, guid: 6452a6ce42758f84eaace3f6c6b8b58b, type: 3}
+  failAudio: {fileID: 8300000, guid: 9f1b1abb64aa65447b0197d40795c835, type: 3}
 --- !u!120 &2223799619992103593
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -799,27 +821,6 @@ LineRenderer:
     generateLightingData: 0
   m_UseWorldSpace: 1
   m_Loop: 0
---- !u!114 &2223799619992103594
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2223799619992103596}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ff3f422991e7f34eb9ffbccda51ef98, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  whatIsGrappleable:
-    serializedVersion: 2
-    m_Bits: 1024
-  gunTip: {fileID: 2223799618897717019}
-  camera: {fileID: 2223799619314023897}
-  player: {fileID: 2223799620444542383}
-  audioSource: {fileID: 393477524}
-  successAudio: {fileID: 8300000, guid: 6452a6ce42758f84eaace3f6c6b8b58b, type: 3}
-  failAudio: {fileID: 8300000, guid: 9f1b1abb64aa65447b0197d40795c835, type: 3}
 --- !u!1 &2223799620439097639
 GameObject:
   m_ObjectHideFlags: 0
@@ -994,7 +995,7 @@ MonoBehaviour:
   playerCam: {fileID: 2223799618744909792}
   orientation: {fileID: 2223799619071576993}
   moveSpeed: 4500
-  maxSpeed: 5
+  maxSpeed: 11
   grounded: 0
   whatIsGround:
     serializedVersion: 2

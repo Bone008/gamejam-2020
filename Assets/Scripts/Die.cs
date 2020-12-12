@@ -6,9 +6,13 @@ using System.IO;
 
 public class Die : MonoBehaviour
 {
-
-  
     public float delayAfterAudio;
+    public string activscene;
+
+    void Start()
+    {
+        activscene = SceneManager.GetActiveScene().name;
+    }
 
     IEnumerator OnTriggerEnter(Collider info)
     {
@@ -18,7 +22,7 @@ public class Die : MonoBehaviour
             AudioSource audio = GetComponent<AudioSource>();
             audio.Play();
             yield return new WaitForSeconds(audio.clip.length + delayAfterAudio); // Wait for the audio to have finished
-            SceneManager.LoadScene("TestLevel01", LoadSceneMode.Single);
+            SceneManager.LoadScene(activscene, LoadSceneMode.Single);
             
         }
     }

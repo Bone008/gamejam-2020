@@ -32,7 +32,7 @@ public class SetPivot : EditorWindow {
 	
 	bool pivotUnchanged; //Flag to decide when to instantiate a copy of the mesh
 	
-    [MenuItem ("GameObject/Set Pivot")] //Place the Set Pivot menu item in the GameObject menu
+    [MenuItem ("Util/Set Pivot")] //Place the Set Pivot menu item in the GameObject menu
     static void Init () {
         SetPivot window = (SetPivot)EditorWindow.GetWindow (typeof (SetPivot));
 		window.RecognizeSelectedObject(); //Initialize the variables by calling RecognizeSelectedObject on the class instance

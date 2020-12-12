@@ -22,7 +22,7 @@ public class MechanismTransform : MechanismBase
     /// </summary>
     private float transitionProgress;
 
-    void Start()
+    void Awake()
     {
         if (targetTransform == null)
             targetTransform = transform;

@@ -3,7 +3,15 @@ using UnityEngine;
 public class GrapplingGun : MonoBehaviour {
 
     private LineRenderer lr;
-    private Vector3 grapplePoint;
+    private Collider grappleCollider;
+    private Vector3 grapplePointOnCollider;
+    private Vector3 grapplePoint {
+        get {
+            if (!grappleCollider) return Vector3.zero;
+            return grappleCollider.transform.position + grapplePointOnCollider;
+        } 
+    }
+    private float grappleProgress;
     public LayerMask whatIsGrappleable;
     public Transform gunTip, camera, player;
     private float maxDistance = 100f;
@@ -24,6 +32,12 @@ public class GrapplingGun : MonoBehaviour {
 
     //Called after Update
     void LateUpdate() {
+        if (IsGrappling())
+        {
+            joint.connectedAnchor = grapplePoint;
+            joint.maxDistance -= 3.0f * Time.deltaTime;
+            joint.maxDistance = Mathf.Max(joint.maxDistance, joint.minDistance);
+        }
         DrawRope();
     }
 
@@ -33,12 +47,13 @@ public class GrapplingGun : MonoBehaviour {
     void StartGrapple() {
         RaycastHit hit;
         if (Physics.Raycast(camera.position, camera.forward, out hit, maxDistance, whatIsGrappleable)) {
-            grapplePoint = hit.point;
+            grappleCollider = hit.collider;
+            grapplePointOnCollider = hit.point - hit.collider.transform.position;
+            float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
+
             joint = player.gameObject.AddComponent<SpringJoint>();
             joint.autoConfigureConnectedAnchor = false;
             joint.connectedAnchor = grapplePoint;
-
-            float distanceFromPoint = Vector3.Distance(player.position, grapplePoint);
 
             //The distance grapple will try to keep from grapple point. 
             joint.maxDistance = distanceFromPoint * 0.8f;
@@ -67,9 +82,9 @@ public class GrapplingGun : MonoBehaviour {
     
     void DrawRope() {
         //If not grappling, don't draw rope
-        if (!joint) return;
+        if (!IsGrappling()) return;
 
-        currentGrapplePosition = Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
+        currentGrapplePosition = grapplePoint; // Vector3.Lerp(currentGrapplePosition, grapplePoint, Time.deltaTime * 8f);
         
         lr.SetPosition(0, gunTip.position);
         lr.SetPosition(1, currentGrapplePosition);

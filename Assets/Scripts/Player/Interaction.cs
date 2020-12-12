@@ -19,7 +19,7 @@ public class Interaction : MonoBehaviour
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, infoCardRange, interactableLayer, QueryTriggerInteraction.Collide))
         {
             float distSq = (hit.transform.position - transform.position).sqrMagnitude;
-            inInteractionRange = distSq * distSq <= interactionRange * interactionRange;
+            inInteractionRange = distSq <= interactionRange * interactionRange;
             SetTarget(hit.collider.gameObject);
         }
         else

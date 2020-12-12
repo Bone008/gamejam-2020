@@ -61,8 +61,10 @@ public class GrapplingGun : MonoBehaviour {
             joint.connectedAnchor = grapplePoint;
 
             //The distance grapple will try to keep from grapple point. 
-            joint.maxDistance = distanceFromPoint * 0.8f;
-            joint.minDistance = distanceFromPoint * 0.25f;
+            //joint.maxDistance = distanceFromPoint * 0.8f;
+            // For max distance only consider Y axis so the player is pulled upwards more quickly.
+            joint.maxDistance = Mathf.Abs(player.position.y - grapplePoint.y) * 0.8f;
+            joint.minDistance = Mathf.Max(distanceFromPoint * 0.25f, joint.maxDistance);
 
             //Adjust these values to fit your game.
             joint.spring = 4.5f;

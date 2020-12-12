@@ -393,7 +393,7 @@ PrefabInstance:
     - target: {fileID: 513722894966958235, guid: 54661cf8107c363459343effbb19db41,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 78.6
+      value: 77.7
       objectReference: {fileID: 0}
     - target: {fileID: 513722894966958235, guid: 54661cf8107c363459343effbb19db41,
         type: 3}
@@ -638,7 +638,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 129334119}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.51, y: 0, z: 0}
+  m_LocalPosition: {x: -6, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 305746384}
@@ -759,7 +759,7 @@ PrefabInstance:
     - target: {fileID: 513722894966958235, guid: 54661cf8107c363459343effbb19db41,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 513722894966958235, guid: 54661cf8107c363459343effbb19db41,
         type: 3}
@@ -809,7 +809,7 @@ PrefabInstance:
     - target: {fileID: 5926926668077870618, guid: 54661cf8107c363459343effbb19db41,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5926926668077870618, guid: 54661cf8107c363459343effbb19db41,
         type: 3}
@@ -1425,12 +1425,12 @@ PrefabInstance:
     - target: {fileID: 513722894966958235, guid: 54661cf8107c363459343effbb19db41,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.56
+      value: 4.57
       objectReference: {fileID: 0}
     - target: {fileID: 513722894966958235, guid: 54661cf8107c363459343effbb19db41,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.26
       objectReference: {fileID: 0}
     - target: {fileID: 513722894966958235, guid: 54661cf8107c363459343effbb19db41,
         type: 3}
@@ -3412,7 +3412,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1280370691}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 0, z: 0}
+  m_LocalPosition: {x: 14.33, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 954715717}
@@ -6209,6 +6209,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LavaAudio
+      objectReference: {fileID: 0}
+    - target: {fileID: 4721534745241422947, guid: 14b5c50109015ae49a687e187a2fea8c,
+        type: 3}
+      propertyPath: Loop
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14b5c50109015ae49a687e187a2fea8c, type: 3}

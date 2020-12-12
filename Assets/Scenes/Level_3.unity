@@ -708,6 +708,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: LavaAudio
       objectReference: {fileID: 0}
+    - target: {fileID: 4721534745241422947, guid: 14b5c50109015ae49a687e187a2fea8c,
+        type: 3}
+      propertyPath: Loop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14b5c50109015ae49a687e187a2fea8c, type: 3}
 --- !u!1 &292111860

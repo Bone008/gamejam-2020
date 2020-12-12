@@ -45,10 +45,10 @@ public class FollowPath : MonoBehaviour
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 currentGoal = currentWaypoint.position;
-        transform.position = Vector3.MoveTowards(transform.position, currentGoal, Time.deltaTime * velocity);
+        transform.position = Vector3.MoveTowards(transform.position, currentGoal, Time.fixedDeltaTime * velocity);
 
         if (isTurning)
         {

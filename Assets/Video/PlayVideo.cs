@@ -7,7 +7,7 @@ using UnityEngine.Video;
 public class PlayVideo : MonoBehaviour
 {
 
-    public GameObject panel;
+    protected GameObject panel;
 
     private bool playvideo = false;
 

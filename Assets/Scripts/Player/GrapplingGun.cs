@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class GrapplingGun : MonoBehaviour {
 
+    public float reelInSpeed = 10;
+
     private LineRenderer lr;
     private Collider grappleCollider;
     private Vector3 grapplePointOnCollider;
@@ -38,7 +40,7 @@ public class GrapplingGun : MonoBehaviour {
         if (IsGrappling())
         {
             joint.connectedAnchor = grapplePoint;
-            joint.maxDistance -= 3.0f * Time.deltaTime;
+            joint.maxDistance -= reelInSpeed * Time.deltaTime;
             joint.maxDistance = Mathf.Max(joint.maxDistance, joint.minDistance);
         }
         DrawRope();

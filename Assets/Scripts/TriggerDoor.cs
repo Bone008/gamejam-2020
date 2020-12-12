@@ -21,7 +21,7 @@ public class TriggerDoor : MonoBehaviour
             if (!string.IsNullOrEmpty(nextSceneName))
             {
                 yield return new WaitForSeconds(audio.clip.length + delayAfterAudio); // Wait for the audio to have finished
-                SceneManager.LoadScene("TestLevel02", LoadSceneMode.Single);
+                SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
             }
         }
     }

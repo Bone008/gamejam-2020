@@ -1698,6 +1698,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6378863903272324597, guid: 275930731cfaa964ebd024afaa457d8b,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: e7f0039ac73a12045b798033b1985fa1,
+        type: 2}
     - target: {fileID: 7011538806827924753, guid: 275930731cfaa964ebd024afaa457d8b,
         type: 3}
       propertyPath: m_Name
@@ -2643,6 +2649,12 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6378863903272324597, guid: 275930731cfaa964ebd024afaa457d8b,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: e7f0039ac73a12045b798033b1985fa1,
+        type: 2}
     - target: {fileID: 7011538806827924753, guid: 275930731cfaa964ebd024afaa457d8b,
         type: 3}
       propertyPath: m_Name
@@ -4565,7 +4577,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1831935365}
     m_Modifications:
-    - target: {fileID: 2960495742707959718, guid: 69f90df850ea3e5418c8a83264036b9b,
+    - target: {fileID: 3932820251412757945, guid: 198b83472e9cfa24ca1fee0134062282,
+        type: 3}
+      propertyPath: nextSceneName
+      value: Level_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932820251412757948, guid: 198b83472e9cfa24ca1fee0134062282,
+        type: 3}
+      propertyPath: m_Name
+      value: DoorExit
+      objectReference: {fileID: 0}
+    - target: {fileID: 3932820251412757949, guid: 198b83472e9cfa24ca1fee0134062282,
         type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -4660,6 +4682,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3932820251412757945, guid: 198b83472e9cfa24ca1fee0134062282,
+        type: 3}
+      propertyPath: nextSceneName
+      value: Level_2
+      objectReference: {fileID: 0}
     - target: {fileID: 3932820251412757948, guid: 198b83472e9cfa24ca1fee0134062282,
         type: 3}
       propertyPath: m_Name

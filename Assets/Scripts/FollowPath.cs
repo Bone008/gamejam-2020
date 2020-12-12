@@ -14,6 +14,7 @@ public class FollowPath : MonoBehaviour
     public float velocity = 5;
     public bool isLooping = false;
     public bool initiallyTeleportToFirstWaypoint = true;
+    public bool isTurning = false;
 
     private int currentIndex = -1;
     private Transform currentWaypoint;
@@ -23,7 +24,12 @@ public class FollowPath : MonoBehaviour
 
     void Start()
     {
-        if(waypointsRoot?.childCount < 2)
+        if (this.name.Equals("3Arrows"))
+        {
+            isTurning = true;
+        }
+
+        if (waypointsRoot?.childCount < 2)
         {
             Debug.LogError("[FollowPath] Need at least 2 waypoints to form a path. Please attach empty GameObjects as children of the 'Path' object.", waypointsRoot);
             this.enabled = false;
@@ -43,7 +49,14 @@ public class FollowPath : MonoBehaviour
     {
         Vector3 currentGoal = currentWaypoint.position;
         transform.position = Vector3.MoveTowards(transform.position, currentGoal, Time.deltaTime * velocity);
+
+        if (isTurning)
+        {
+            Vector3 direction = currentGoal - transform.position;
+            transform.rotation = Quaternion.LookRotation(direction);
+        }
         
+
         // We might do this instead to play nicer with the physics engine.
         // On its own, the player still wiggles around a bit while standing on a platform and falls off.
         // Instead, the script "AttachStuffOnEnter" now takes care of parenting the player to the platform.

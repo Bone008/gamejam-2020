@@ -10,7 +10,7 @@ public class MechanismGroup : MechanismBase
 {
     private MechanismBase[] children;
 
-    void Start()
+    void Awake()
     {
         children = GetComponentsInChildren<MechanismBase>();
     }

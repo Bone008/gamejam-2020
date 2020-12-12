@@ -38,6 +38,13 @@ public class AttachStuffOnEnter : MonoBehaviour
     {
         if (other.attachedRigidbody != null)
         {
+            if (other.transform.parent && other.transform.parent.TryGetComponent(out AttachStuffOnEnter otherAttacher))
+            {
+                // Artificially trigger exit of other collider that the object snatched up to reset its original parent.
+                // This can still break if there is some OTHER script that re-parents stuff, but we don't have that atm soo ...
+                otherAttacher.OnTriggerExit(other);
+            }
+
             originalParentsById.Add(other.transform.GetInstanceID(), other.transform.parent);
             other.transform.SetParent(transform, true);
         }

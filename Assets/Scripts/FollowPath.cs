@@ -9,24 +9,45 @@ using UnityEngine;
 /// </summary>
 public class FollowPath : MonoBehaviour
 {
-    [Tooltip("IMPORTANT: Waypoints may NOT be children of this script, otherwise they would be moved along with the platform and break.")]
+    [Tooltip("IMPORTANT: Waypoints may NOT be children of the FollowPath script, otherwise they would be moved along with the platform and break.")]
     public Transform waypointsRoot;
     public float velocity = 5;
     public bool isLooping = false;
+    public bool initiallyTeleportToFirstWaypoint = true;
 
     private int currentIndex = -1;
     private Transform currentWaypoint;
     private bool isGoingBackward = false;
 
+    //private Rigidbody rb;
+
     void Start()
     {
+        if(waypointsRoot?.childCount < 2)
+        {
+            Debug.LogError("[FollowPath] Need at least 2 waypoints to form a path. Please attach empty GameObjects as children of the 'Path' object.", waypointsRoot);
+            this.enabled = false;
+            return;
+        }
+        //rb = gameObject.AddComponent<Rigidbody>();
+        //rb.isKinematic = true;
         NextWaypoint();
+
+        if(initiallyTeleportToFirstWaypoint)
+        {
+            transform.position = currentWaypoint.position;
+        }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         Vector3 currentGoal = currentWaypoint.position;
         transform.position = Vector3.MoveTowards(transform.position, currentGoal, Time.deltaTime * velocity);
+        
+        // We might do this instead to play nicer with the physics engine.
+        // On its own, the player still wiggles around a bit while standing on a platform and falls off.
+        // Instead, the script "AttachStuffOnEnter" now takes care of parenting the player to the platform.
+        //rb.MovePosition(Vector3.MoveTowards(transform.position, currentGoal, Time.fixedDeltaTime * velocity));
 
         if (transform.position == currentGoal)
         {
@@ -53,7 +74,7 @@ public class FollowPath : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        if (waypointsRoot == null) return;
+        if (waypointsRoot == null || waypointsRoot.childCount < 2) return;
         Vector3 prev = waypointsRoot.GetChild(0).position;
         foreach (Transform waypoint in waypointsRoot.transform)
         {

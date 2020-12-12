@@ -7,23 +7,22 @@ using System.IO;
 public class Die : MonoBehaviour
 {
     public float delayAfterAudio;
-    public string activscene;
-
+    public List<AudioClip> dieAudio;
     public AudioSource audioSource;
-    public AudioClip dieAudio;
 
     void Start()
     {
-        activscene = SceneManager.GetActiveScene().name;
     }
 
     IEnumerator OnTriggerEnter(Collider info)
     {
         if (info.gameObject.name == "Player")
         {
-            audioSource.PlayOneShot(dieAudio);
-            yield return new WaitForSeconds(dieAudio.length + delayAfterAudio); // Wait for the audio to have finished
-            SceneManager.LoadScene(activscene, LoadSceneMode.Single);
+            int idx = (int)(Random.value * dieAudio.Count);
+            audioSource.PlayOneShot(dieAudio[idx]);
+            yield return new WaitForSeconds(dieAudio[idx].length + delayAfterAudio); // Wait for the audio to have finished
+            Scene scene = SceneManager.GetActiveScene(); 
+            SceneManager.LoadScene(scene.name);
         }
     }
 }

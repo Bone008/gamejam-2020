@@ -53,7 +53,7 @@ public class RenderPath : MonoBehaviour
         length = CalculateLength(positions);
         num = (int)((length / spawnDistance) - 1);
         direction = positions[1] - positions[0];
-        position = waypointsRoot.transform.position;
+        position = waypointsRoot.GetChild(0).transform.position;
         rotation = Quaternion.LookRotation(direction);
         SpawnArrow = (GameObject)Instantiate(arrow, position, rotation);
         SpawnArrow.GetComponent<FollowPath>().waypointsRoot = this.waypointsRoot;
@@ -62,7 +62,7 @@ public class RenderPath : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float distance = Vector3.Distance(arrow.transform.position, position);
+        float distance = (SpawnArrow.transform.position - position).magnitude; //Vector3.Distance(position, SpawnArrow.transform.position);
         if (distance > spawnDistance && num > 0)
         {
             SpawnArrow = (GameObject)Instantiate(arrow, position, rotation);

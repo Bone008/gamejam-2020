@@ -16,6 +16,9 @@ public class GrapplingGun : MonoBehaviour {
     public Transform gunTip, camera, player;
     private float maxDistance = 100f;
     private SpringJoint joint;
+    public AudioSource audioSource;
+    public AudioClip successAudio;
+    public AudioClip failAudio;
 
     void Awake() {
         lr = GetComponent<LineRenderer>();
@@ -66,6 +69,12 @@ public class GrapplingGun : MonoBehaviour {
 
             lr.positionCount = 2;
             currentGrapplePosition = gunTip.position;
+
+            audioSource.PlayOneShot(successAudio);
+        }
+        else
+        {
+            audioSource.PlayOneShot(failAudio);
         }
     }
 

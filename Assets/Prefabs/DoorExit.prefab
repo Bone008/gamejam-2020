@@ -6005,6 +6005,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1d652713354d134dbe1d37c52e64d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextSceneName: 
+  delayAfterAudio: 2
 --- !u!82 &3932820251412757946
 AudioSource:
   m_ObjectHideFlags: 0

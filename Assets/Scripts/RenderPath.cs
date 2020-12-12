@@ -32,11 +32,6 @@ public class RenderPath : MonoBehaviour
         }
         lineRenderer = GetComponent<LineRenderer>();
         lineRenderer.positionCount = waypointsRoot.childCount;
-        lineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-        lineRenderer.startColor = Color.cyan;
-        lineRenderer.endColor = Color.cyan;
-        lineRenderer.startWidth = .1f;
-        lineRenderer.endWidth = .1f;
         int i = 0;
         foreach (Transform waypoint in waypointsRoot.transform)
         {

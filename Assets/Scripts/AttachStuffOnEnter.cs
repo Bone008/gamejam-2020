@@ -50,6 +50,7 @@ public class AttachStuffOnEnter : MonoBehaviour
             if (other.transform.parent != transform)
             {
                 Debug.Log("[AttachStuffOnEnter] Someone else snatched our passenger away :O");
+                originalParentsById.Remove(other.transform.GetInstanceID());
                 return;
             }
             other.transform.SetParent(origParent, true);

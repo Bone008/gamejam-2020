@@ -12,6 +12,7 @@ public class RenderPath : MonoBehaviour
     private Vector3 position;
     private Quaternion rotation;
     private int num = 0;
+    private bool isLooping = false;
 
     public GameObject anchor;
     public GameObject arrow;
@@ -22,7 +23,7 @@ public class RenderPath : MonoBehaviour
     void Start()
     {
         waypointsRoot = GetComponent<Transform>();
-        bool isLooping = anchor.GetComponent<FollowPath>().isLooping;
+        isLooping = anchor.GetComponent<FollowPath>().isLooping;
         if (waypointsRoot?.childCount < 2)
         {
             Debug.LogError("[RenderPath] Need at least 2 waypoints to form a path. Please attach empty GameObjects as children of the 'Path' object.", waypointsRoot);
@@ -57,6 +58,7 @@ public class RenderPath : MonoBehaviour
         rotation = Quaternion.LookRotation(direction);
         SpawnArrow = (GameObject)Instantiate(arrow, position, rotation);
         SpawnArrow.GetComponent<FollowPath>().waypointsRoot = this.waypointsRoot;
+        SpawnArrow.GetComponent<FollowPath>().isLooping = isLooping;
     }
 
     // Update is called once per frame
@@ -67,13 +69,13 @@ public class RenderPath : MonoBehaviour
         {
             SpawnArrow = (GameObject)Instantiate(arrow, position, rotation);
             SpawnArrow.GetComponent<FollowPath>().waypointsRoot = this.waypointsRoot;
+            SpawnArrow.GetComponent<FollowPath>().isLooping = isLooping;
             num -= 1;
         }
     }
 
     float CalculateLength(Vector3[] positions)
     {
-        bool isLooping = anchor.GetComponent<FollowPath>().isLooping;
         float length = 0.0f;
         Vector3 prev = positions[0];
         for (int i = 1; i < positions.Length; i++)

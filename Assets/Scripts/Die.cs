@@ -9,6 +9,9 @@ public class Die : MonoBehaviour
     public float delayAfterAudio;
     public string activscene;
 
+    public AudioSource audioSource;
+    public AudioClip dieAudio;
+
     void Start()
     {
         activscene = SceneManager.GetActiveScene().name;
@@ -18,12 +21,9 @@ public class Die : MonoBehaviour
     {
         if (info.gameObject.name == "Player")
         {
-            Debug.Log("Collision Detected");
-            AudioSource audio = GetComponent<AudioSource>();
-            audio.Play();
-            yield return new WaitForSeconds(audio.clip.length + delayAfterAudio); // Wait for the audio to have finished
+            audioSource.PlayOneShot(dieAudio);
+            yield return new WaitForSeconds(dieAudio.length + delayAfterAudio); // Wait for the audio to have finished
             SceneManager.LoadScene(activscene, LoadSceneMode.Single);
-            
         }
     }
 }

@@ -152,7 +152,7 @@ public class PlayerMovement : MonoBehaviour {
 
             //Add jump forces
             rb.AddForce(Vector2.up * jumpForce * 1.5f);
-            rb.AddForce(normalVector * jumpForce * 0.5f);
+            rb.AddForce(normalVector * jumpForce * 0.1f);
             
             //If jumping while falling, reset y velocity.
             Vector3 vel = rb.velocity;

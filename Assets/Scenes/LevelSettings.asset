@@ -13,17 +13,36 @@ MonoBehaviour:
   m_Name: LevelSettings
   m_EditorClassIdentifier: 
   onDeathSpeeches:
-  - {fileID: 8300000, guid: 80cf02a5612809349a683487bae0e406, type: 3}
+  - {fileID: 8300000, guid: 318459880bdf5614ebad91518cd2f251, type: 3}
+  - {fileID: 8300000, guid: 3b7c7060312ca804ca4559a7c682915f, type: 3}
+  - {fileID: 8300000, guid: 2acfe9eded1e0d94984857e2ced91037, type: 3}
+  - {fileID: 8300000, guid: 05fb8b64da209ba4091d6b17886ad2d3, type: 3}
+  - {fileID: 8300000, guid: 054bbc4e8ea91554c99e773815fd53db, type: 3}
+  - {fileID: 8300000, guid: 98cb79c7023eaa94785cd07c34550964, type: 3}
+  - {fileID: 8300000, guid: bca43957eec15214280f119ad846fadd, type: 3}
+  - {fileID: 8300000, guid: ad585350a48d7794a8399c1852b69b52, type: 3}
+  - {fileID: 8300000, guid: ab93a73530e787e4db44267c85ea7b90, type: 3}
   onBrokenGrappleSpeeches:
-  - {fileID: 8300000, guid: 80cf02a5612809349a683487bae0e406, type: 3}
+  - {fileID: 8300000, guid: 5e47f8b5573ed8142b5eef5ab8738dd2, type: 3}
+  - {fileID: 8300000, guid: 9941aa3206504924fb8fd24d3b9fa1be, type: 3}
+  - {fileID: 8300000, guid: 87ffdf6fa4eab09489cbd30e46228037, type: 3}
+  - {fileID: 8300000, guid: c81e5da68b43fc849b7f1e1bd81cf78c, type: 3}
+  - {fileID: 8300000, guid: d1906667cc7b42848be1b51060696c9e, type: 3}
+  - {fileID: 8300000, guid: d7779d8b12e38e8419319bcb178329a9, type: 3}
   onRandomVideoSpeeches:
-  - {fileID: 8300000, guid: 80cf02a5612809349a683487bae0e406, type: 3}
+  - {fileID: 8300000, guid: ed9a8ea5fe96bb14c8146cb74ae60a7d, type: 3}
+  - {fileID: 8300000, guid: 163809233a20169449e32b7acc88a0c1, type: 3}
+  - {fileID: 8300000, guid: d263e69b4b5b92749aaea46c76dbd7d3, type: 3}
+  - {fileID: 8300000, guid: 9d5f842636d3a0a4a8df0b887e016c5c, type: 3}
+  - {fileID: 8300000, guid: a9e11ae2f689d1f47860a9afd6187fc2, type: 3}
+  - {fileID: 8300000, guid: fc08854aa1e6c6b4eb3eebcb5ff2c6d2, type: 3}
+  - {fileID: 8300000, guid: a4a9522de4150d549814e5811c7cf4e7, type: 3}
   levels:
   - sceneName: Level_0
     brokenGrapplingHook: 0
     brokenPathHints: 0
     corruption: 0
-    optionalEntranceSpeech: {fileID: 8300000, guid: 80cf02a5612809349a683487bae0e406,
+    optionalEntranceSpeech: {fileID: 8300000, guid: ff22b230319bf364292ae2d9a2f69033,
       type: 3}
     optionalFinishSpeech: {fileID: 0}
     comment: putting on HMD
@@ -31,56 +50,64 @@ MonoBehaviour:
     brokenGrapplingHook: 0
     brokenPathHints: 0
     corruption: 0
-    optionalEntranceSpeech: {fileID: 0}
+    optionalEntranceSpeech: {fileID: 8300000, guid: 03a75a7ad3dc57a4980238da414d2e8a,
+      type: 3}
     optionalFinishSpeech: {fileID: 0}
     comment: grappler-intro normal
   - sceneName: Level_1
     brokenGrapplingHook: 1
     brokenPathHints: 0
     corruption: 0
-    optionalEntranceSpeech: {fileID: 0}
+    optionalEntranceSpeech: {fileID: 8300000, guid: 11db7fc33f802664c8f01969b41e7a2c,
+      type: 3}
     optionalFinishSpeech: {fileID: 0}
     comment: grappler-intro mit broken grapple
   - sceneName: Level_1_5
     brokenGrapplingHook: 1
     brokenPathHints: 0
     corruption: 1
-    optionalEntranceSpeech: {fileID: 0}
+    optionalEntranceSpeech: {fileID: 8300000, guid: 79a89ff85c3d82d4da370c3e79009f3c,
+      type: 3}
     optionalFinishSpeech: {fileID: 0}
     comment: platform-intro
   - sceneName: Level_2
     brokenGrapplingHook: 0
     brokenPathHints: 0
     corruption: 1
-    optionalEntranceSpeech: {fileID: 0}
+    optionalEntranceSpeech: {fileID: 8300000, guid: 8402329dc2802ce4a99a868bcba6c81c,
+      type: 3}
     optionalFinishSpeech: {fileID: 0}
     comment: grappler-pro normal
   - sceneName: Level_2
     brokenGrapplingHook: 1
     brokenPathHints: 0
     corruption: 2
-    optionalEntranceSpeech: {fileID: 0}
+    optionalEntranceSpeech: {fileID: 8300000, guid: 7b54ab4c0dd209e47b16beefb26d8de7,
+      type: 3}
     optionalFinishSpeech: {fileID: 0}
     comment: grappler-pro mit broken grapple
   - sceneName: Level_3
     brokenGrapplingHook: 1
     brokenPathHints: 0
     corruption: 2
-    optionalEntranceSpeech: {fileID: 0}
+    optionalEntranceSpeech: {fileID: 8300000, guid: 508e98e0f0fb5c24bb838ae9455de760,
+      type: 3}
     optionalFinishSpeech: {fileID: 0}
     comment: platforms-pro normal
   - sceneName: Level_3
     brokenGrapplingHook: 1
     brokenPathHints: 1
     corruption: 2
-    optionalEntranceSpeech: {fileID: 0}
+    optionalEntranceSpeech: {fileID: 8300000, guid: 94296b67befb0074b919791cdce3d388,
+      type: 3}
     optionalFinishSpeech: {fileID: 0}
     comment: platforms-pro ohne visual aid
   - sceneName: Level_Omega
     brokenGrapplingHook: 0
     brokenPathHints: 0
     corruption: 2
-    optionalEntranceSpeech: {fileID: 0}
+    optionalEntranceSpeech: {fileID: 8300000, guid: 7d110afa6fdd92c43bb6dea3481626fa,
+      type: 3}
     optionalFinishSpeech: {fileID: 0}
     comment: the ultimate troll
   enableForcedConfigForEditor: 0

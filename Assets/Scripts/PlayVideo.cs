@@ -10,6 +10,7 @@ public class PlayVideo : MonoBehaviour
     public GameObject panel;
     public RectTransform arFrame;
     public VideoClip[] videos;
+    public string[] videoNames;
     public int[] lengths;
     private bool isPlaying = false;
     private VideoPlayer videoPlayer;
@@ -74,6 +75,8 @@ public class PlayVideo : MonoBehaviour
     {
         if (isPlaying) return;
         int rnd = (int)UnityEngine.Random.Range(0, videos.Length);
+        
+        videoPlayer.url = System.IO.Path.Combine(Application.streamingAssetsPath, videoNames[rnd]);
         VideoClip clip = videos[rnd];
         videoPlayer.clip = clip;
         Debug.Log(clip.width + "x" + clip.height);

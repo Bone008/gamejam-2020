@@ -23,6 +23,7 @@ public class TrollEnding : MonoBehaviour
 
     private IEnumerator DoTheUltimateTroll()
     {
+        video.url = System.IO.Path.Combine(Application.streamingAssetsPath, "rickrolled.mp4");
         video.Play();
         yield return new WaitForSeconds(5f);
         video.SetDirectAudioVolume(0, 0.8f);

@@ -1889,7 +1889,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: "Initialization ........... Complete!\n                                 
-    \nWelcome to\nAR Super OS 9001\xA9!"
+    \nWelcome to\nAISCHE AR Super OS 9001\xA9!"
 --- !u!222 &1063445149
 CanvasRenderer:
   m_ObjectHideFlags: 0

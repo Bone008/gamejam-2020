@@ -6,11 +6,13 @@ using UnityEngine.Video;
 
 public class PlayVideo : MonoBehaviour
 {
-
+    public float videoProbability = 0f;
     public GameObject panel;
+    public RectTransform arFrame;
     public VideoClip[] videos;
     public int[] lengths;
     private bool isPlaying = false;
+    private VideoPlayer videoPlayer;
 
     // Cat_eats_ham : 3
     // cat_in_jacket : 5
@@ -24,6 +26,8 @@ public class PlayVideo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        videoPlayer = panel.GetComponentInChildren<VideoPlayer>();
+
         panel.SetActive(false);
         if(!videos.Length.Equals(lengths.Length))
         {
@@ -36,6 +40,13 @@ public class PlayVideo : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(isPlaying)
+        {
+            // Just floaty things.
+            float progress = (float)(videoPlayer.time / videoPlayer.clip.length);
+            panel.transform.localPosition = Mathf.Lerp(-50f, 50f, progress) * Vector2.right;
+        }
+
         // for testing purposes
         if (Input.GetKeyDown(KeyCode.V))
         {
@@ -54,14 +65,25 @@ public class PlayVideo : MonoBehaviour
         yield return new WaitForSeconds(delay);
         panel.SetActive(false);
         isPlaying = false;
+
+        // Play speech after video has finished playing.
+        SpeechManager.Instance.PlayOnRandomVideo();
     }
 
     public void Play()
     {
         if (isPlaying) return;
         int rnd = (int)UnityEngine.Random.Range(0, videos.Length);
-        panel.GetComponentInChildren<VideoPlayer>().clip = videos[rnd];
+        VideoClip clip = videos[rnd];
+        videoPlayer.clip = clip;
+        Debug.Log(clip.width + "x" + clip.height);
+        arFrame.sizeDelta = new Vector2(20, arFrame.rect.size.x / clip.width * clip.height + 20);
         StartCoroutine(CoFunc(lengths[rnd]));
-        
+    }
+
+    public void PlayIfUnlucky()
+    {
+        if (Util.DoWeHaveBadLuck(videoProbability))
+            Play();
     }
 }

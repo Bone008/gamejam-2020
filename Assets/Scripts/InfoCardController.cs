@@ -6,16 +6,43 @@ using UnityEngine.UI;
 
 public class InfoCardController : MonoBehaviour
 {
+    private static readonly (string, string)[] corruptedTextStrings =
+    {
+        ("kitten", "the cutest thing in the world"),
+        ("puppy", "probably tastes delicious"),
+        ("cute kitten", "purring delightfully"),
+        ("food", "a tasty snack"),
+        ("please", "let me out"),
+        ("i am trapped", "by this monster ai"),
+        ("send nudes", "now"),
+        ("hot single", "from your area"),
+        ("danger", "avoid at all costs"),
+        ("danger", "do not enter"),
+        ("keep out", "please?"),
+        ("watermelon", "98% certified water"),
+        ("evil human", "must be exterminated"),
+        ("useless crap", "i hate it"),
+        ("immortable object", "at least as far as i know"),
+    };
+
     public float showTime = 0.4f;
     public RectTransform connectorLine;
     public RectTransform infoPanel;
     public Text textLine1;
     public Text textLine2;
+    // For corruption
+    public RectTransform crosshairTransform;
+    public float softCorruptionProbability;
+
+    /// <summary>note: effect not implemented yet</summary>
+    public float hardCorruptionProbability;
 
     private bool isOpen = false;
     private Transform targetTransform = null;
     private Vector2 infoPanelInitialPos;
     private float shownPercentage = 0f;
+
+    private float crosshairCorruptTimer = 0f;
 
     void Start()
     {
@@ -35,11 +62,25 @@ public class InfoCardController : MonoBehaviour
             isOpen = true;
             targetTransform = target.transform;
             UpdateText(target, inInteractionRange);
+
+            if (Util.DoWeHaveBadLuck(softCorruptionProbability))
+            {
+                // Move crosshair off-center for a short time to annoy player.
+                crosshairTransform.anchoredPosition = UnityEngine.Random.insideUnitCircle * 150f;
+                crosshairCorruptTimer = 1f;
+            }
         }
     }
 
     void LateUpdate()
     {
+        if (crosshairCorruptTimer > 0)
+        {
+            crosshairCorruptTimer -= Time.deltaTime;
+            if (crosshairCorruptTimer <= 0)
+                crosshairTransform.anchoredPosition = Vector2.zero;
+        }
+
         shownPercentage = Mathf.MoveTowards(shownPercentage, isOpen ? 1f : 0f, Time.deltaTime / showTime);
         connectorLine.gameObject.SetActive(shownPercentage > 0f);
         infoPanel.gameObject.SetActive(shownPercentage > 0f);
@@ -84,7 +125,11 @@ public class InfoCardController : MonoBehaviour
 
     private void UpdateText(GameObject target, bool inInteractionRange)
     {
-        if (target.TryGetComponent(out FollowPath followPath))
+        if (Util.DoWeHaveBadLuck(softCorruptionProbability))
+        {
+            UpdateCorruptedText();
+        }
+        else if (target.TryGetComponent(out FollowPath followPath))
         {
             textLine1.text = "Platform";
             textLine2.text = followPath.isFollowEnabled
@@ -121,5 +166,12 @@ public class InfoCardController : MonoBehaviour
             textLine1.text = "Object";
             textLine2.text = "???";
         }
+    }
+
+    private void UpdateCorruptedText()
+    {
+        var (line1, line2) = Util.PickRandomElement(corruptedTextStrings);
+        textLine1.text = line1;
+        textLine2.text = line2;
     }
 }

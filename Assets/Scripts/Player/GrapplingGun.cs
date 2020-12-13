@@ -26,6 +26,8 @@ public class GrapplingGun : MonoBehaviour {
     private bool didBreak = true;
     private float corruptedTimer;
 
+    public PlayVideo playVideoScript;
+
     void Awake() {
         lr = GetComponent<LineRenderer>();
     }
@@ -45,6 +47,7 @@ public class GrapplingGun : MonoBehaviour {
             didBreak = true;
             StopGrapple();
             audioSource.PlayOneShot(brokenAudio);
+            SpeechManager.Instance.PlayOnBrokenGrapple();
         }
     }
 
@@ -89,11 +92,12 @@ public class GrapplingGun : MonoBehaviour {
 
             if (corrupted)
             {
-                corruptedTimer = 1.0f;
+                corruptedTimer = 0.6f;
                 didBreak = false;
             }
 
             audioSource.PlayOneShot(successAudio);
+            playVideoScript?.PlayIfUnlucky();
         }
         else
         {

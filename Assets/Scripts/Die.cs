@@ -20,7 +20,9 @@ public class Die : MonoBehaviour
         {
             int idx = (int)(Random.value * dieAudio.Count);
             audioSource.PlayOneShot(dieAudio[idx]);
-            yield return new WaitForSeconds(dieAudio[idx].length + delayAfterAudio); // Wait for the audio to have finished
+            yield return new WaitForSeconds(dieAudio[idx].length); // Wait for the audio to have finished
+            SpeechManager.Instance.PlayOnDeath();
+            yield return new WaitForSeconds(delayAfterAudio);
             Scene scene = SceneManager.GetActiveScene(); 
             SceneManager.LoadScene(scene.name);
         }

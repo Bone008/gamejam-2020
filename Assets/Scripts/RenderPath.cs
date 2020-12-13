@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(LineRenderer))]
 public class RenderPath : MonoBehaviour
 {
     private LineRenderer lineRenderer;
@@ -14,14 +15,19 @@ public class RenderPath : MonoBehaviour
     private int num = 0;
     private bool isLooping = false;
 
+    private LevelManager levelManager;
+
     public GameObject anchor;
     public GameObject arrow;
-    private GameObject SpawnArrow;
+    private GameObject lastSpawnedArrow;
+    private List<Renderer> allArrowRenderers = new List<Renderer>();
     //public int coverage = 1;
     public float spawnDistance = 3f;
 
     void Start()
     {
+        levelManager = LevelManager.FindActiveInstance();
+
         waypointsRoot = GetComponent<Transform>();
         isLooping = anchor.GetComponent<FollowPath>().isLooping;
         if (waypointsRoot?.childCount < 2)
@@ -51,22 +57,36 @@ public class RenderPath : MonoBehaviour
         direction = positions[1] - positions[0];
         position = waypointsRoot.GetChild(0).transform.position;
         rotation = Quaternion.LookRotation(direction);
-        SpawnArrow = (GameObject)Instantiate(arrow, position, rotation);
-        SpawnArrow.GetComponent<FollowPath>().waypointsRoot = this.waypointsRoot;
-        SpawnArrow.GetComponent<FollowPath>().isLooping = isLooping;
+        SpawnNewArrow();
     }
 
     // Update is called once per frame
     void Update()
     {
-        float distance = (SpawnArrow.transform.position - position).magnitude; //Vector3.Distance(position, SpawnArrow.transform.position);
-        if (distance > spawnDistance && num > 0)
+        bool shouldEnable = levelManager.areVisualHintsVisible;
+        if(lineRenderer.enabled != shouldEnable)
         {
-            SpawnArrow = (GameObject)Instantiate(arrow, position, rotation);
-            SpawnArrow.GetComponent<FollowPath>().waypointsRoot = this.waypointsRoot;
-            SpawnArrow.GetComponent<FollowPath>().isLooping = isLooping;
-            num -= 1;
+            lineRenderer.enabled = shouldEnable;
+            allArrowRenderers.ForEach(r => r.enabled = shouldEnable);
         }
+
+        float distanceSqr = (lastSpawnedArrow.transform.position - position).sqrMagnitude; //Vector3.Distance(position, SpawnArrow.transform.position);
+        if (distanceSqr > spawnDistance * spawnDistance && num > 0)
+        {
+            SpawnNewArrow();
+            num--;
+        }
+    }
+
+    private void SpawnNewArrow()
+    {
+        lastSpawnedArrow = Instantiate(arrow, position, rotation);
+        lastSpawnedArrow.GetComponent<FollowPath>().waypointsRoot = this.waypointsRoot;
+        lastSpawnedArrow.GetComponent<FollowPath>().isLooping = isLooping;
+        var renderers = lastSpawnedArrow.GetComponentsInChildren<Renderer>();
+        allArrowRenderers.AddRange(renderers);
+        foreach (var r in renderers)
+            r.enabled = levelManager.areVisualHintsVisible;
     }
 
     float CalculateLength(Vector3[] positions)

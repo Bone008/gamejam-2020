@@ -16,8 +16,12 @@ public class DoorExit : MonoBehaviour
             Debug.Log("Collision Detected");
             AudioSource audio = GetComponent<AudioSource>();
             audio.Play();
-            yield return new WaitForSeconds(audio.clip.length + delayAfterAudio); // Wait for the audio to have finished
-            LevelManager.FindActiveInstance().LoadNextLevel();
+            yield return new WaitForSeconds(audio.clip.length);
+
+            var levelManager = LevelManager.FindActiveInstance();
+            levelManager.OnPlayerWinLevel(out float extraWaitTime);
+            yield return new WaitForSeconds(extraWaitTime + delayAfterAudio);
+            levelManager.LoadNextLevel();
         }
     }
 }

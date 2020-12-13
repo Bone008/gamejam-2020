@@ -16,9 +16,12 @@ public struct LevelInfo
     [Scene]
     public string sceneName;
     public bool brokenGrapplingHook;
+    public bool brokenPathHints;
     public CorruptionLevel corruption;
     public AudioClip optionalEntranceSpeech;
     public AudioClip optionalFinishSpeech;
+    [Multiline]
+    public string comment;
 }
 
 public enum CorruptionLevel

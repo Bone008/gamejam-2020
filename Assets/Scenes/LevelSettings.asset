@@ -15,33 +15,67 @@ MonoBehaviour:
   levels:
   - sceneName: Level_0
     brokenGrapplingHook: 0
+    brokenPathHints: 0
     corruption: 0
     optionalEntranceSpeech: {fileID: 0}
     optionalFinishSpeech: {fileID: 0}
+    comment: putting on HMD
   - sceneName: Level_1
     brokenGrapplingHook: 0
+    brokenPathHints: 0
     corruption: 0
     optionalEntranceSpeech: {fileID: 0}
     optionalFinishSpeech: {fileID: 0}
+    comment: grappler-intro normal
   - sceneName: Level_1
     brokenGrapplingHook: 1
+    brokenPathHints: 0
     corruption: 0
     optionalEntranceSpeech: {fileID: 0}
     optionalFinishSpeech: {fileID: 0}
+    comment: grappler-intro mit broken grapple
   - sceneName: Level_1_5
     brokenGrapplingHook: 1
+    brokenPathHints: 0
     corruption: 1
     optionalEntranceSpeech: {fileID: 0}
     optionalFinishSpeech: {fileID: 0}
+    comment: platform-intro
   - sceneName: Level_2
     brokenGrapplingHook: 0
+    brokenPathHints: 0
     corruption: 1
     optionalEntranceSpeech: {fileID: 0}
     optionalFinishSpeech: {fileID: 0}
+    comment: grappler-pro normal
+  - sceneName: Level_2
+    brokenGrapplingHook: 1
+    brokenPathHints: 0
+    corruption: 2
+    optionalEntranceSpeech: {fileID: 0}
+    optionalFinishSpeech: {fileID: 0}
+    comment: grappler-pro mit broken grapple
+  - sceneName: Level_3
+    brokenGrapplingHook: 1
+    brokenPathHints: 0
+    corruption: 2
+    optionalEntranceSpeech: {fileID: 0}
+    optionalFinishSpeech: {fileID: 0}
+    comment: platforms-pro normal
+  - sceneName: Level_3
+    brokenGrapplingHook: 1
+    brokenPathHints: 1
+    corruption: 2
+    optionalEntranceSpeech: {fileID: 0}
+    optionalFinishSpeech: {fileID: 0}
+    comment: platforms-pro ohne visual aid
   enableForcedConfigForEditor: 0
   forcedConfigForEditor:
     sceneName: 
     brokenGrapplingHook: 1
+    brokenPathHints: 1
     corruption: 2
     optionalEntranceSpeech: {fileID: 0}
     optionalFinishSpeech: {fileID: 0}
+    comment: "ONLY FOR DEBUGGING!! If enabled,\nall levels that are started will
+      use \nthese settings."

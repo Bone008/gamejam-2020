@@ -6,7 +6,7 @@ using UnityEngine.Video;
 
 public class PlayVideo : MonoBehaviour
 {
-
+    public float videoProbability = 0f;
     public GameObject panel;
     public RectTransform arFrame;
     public VideoClip[] videos;
@@ -77,5 +77,11 @@ public class PlayVideo : MonoBehaviour
         arFrame.sizeDelta = new Vector2(20, arFrame.rect.size.x / clip.width * clip.height + 20);
         StartCoroutine(CoFunc(lengths[rnd]));
         
+    }
+
+    public void PlayIfUnlucky()
+    {
+        if (Util.DoWeHaveBadLuck(videoProbability))
+            Play();
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Sets up the level config from the configured data.
@@ -14,14 +15,22 @@ public class LevelManager : MonoBehaviour
 
     public AllLevelsData allData;
     public GrapplingGun grapplingScript;
-    public PlayerMovement playerMovementScript;
+    public PlayVideo playVideoScript;
     public InfoCardController infoCardScript;
 
+    public Image blackScreenOverlay;
+
+    /// <summary>Whether the platform path preview and related stuff is CURRENTLY visible.</summary>
+    public bool isGlobalGlitchHappening { get; private set; }
+    /// <summary>Whether the platform path preview and related stuff is CURRENTLY visible.</summary>
+    public bool areVisualHintsVisible { get; private set; }
+
     private LevelInfo levelData;
+    private float globalGlitchCooldown = -1f;
 
     void Awake()
     {
-        if(allData.enableForcedConfigForEditor && Application.isEditor)
+        if (allData.enableForcedConfigForEditor && Application.isEditor)
         {
             Debug.Log("[LevelManager] Using settings from 'forced config for editor'. Use this for debugging only and do NOT check it in!");
             levelData = allData.forcedConfigForEditor;
@@ -50,24 +59,44 @@ public class LevelManager : MonoBehaviour
         Debug.Log($"[LevelManager] Config: brokenGrapple={levelData.brokenGrapplingHook}, corruption={levelData.corruption}");
 
         grapplingScript.corrupted = levelData.brokenGrapplingHook;
-        switch(levelData.corruption)
+        switch (levelData.corruption)
         {
             case CorruptionLevel.None:
-                playerMovementScript.videoProbability = 0f;
+                playVideoScript.videoProbability = 0f;
                 infoCardScript.softCorruptionProbability = 0f;
                 infoCardScript.hardCorruptionProbability = 0f;
                 break;
             case CorruptionLevel.Low:
-                playerMovementScript.videoProbability = 0.08f;
+                globalGlitchCooldown = 1f; // start the glitches by setting >0
+                playVideoScript.videoProbability = 0.1f;
                 infoCardScript.softCorruptionProbability = 0.25f;
                 infoCardScript.hardCorruptionProbability = 0.01f;
                 break;
             case CorruptionLevel.Annoying:
-                playerMovementScript.videoProbability = 0.2f;
+                globalGlitchCooldown = 1f; // start the glitches by setting >0
+                playVideoScript.videoProbability = 0.2f;
                 infoCardScript.softCorruptionProbability = 0.9f;
                 infoCardScript.hardCorruptionProbability = 0.4f;
                 break;
         }
+    }
+
+    void Update()
+    {
+        if (globalGlitchCooldown > 0)
+        {
+            globalGlitchCooldown -= Time.deltaTime;
+            if (globalGlitchCooldown <= 0)
+            {
+                // Toggle and restart timer.
+                isGlobalGlitchHappening = !isGlobalGlitchHappening;
+                float duration = (levelData.corruption == CorruptionLevel.Annoying ? 0.5f : 0.25f);
+                float cooldown = UnityEngine.Random.Range(5f, 30f) * (levelData.corruption == CorruptionLevel.Annoying ? 0.3f : 1f);
+                globalGlitchCooldown = isGlobalGlitchHappening ? duration : cooldown;
+            }
+        }
+        // Equivalent for now, might change decision.
+        areVisualHintsVisible = !isGlobalGlitchHappening && !levelData.brokenPathHints;
     }
 
     public void LoadFirstLevel()
@@ -88,6 +117,11 @@ public class LevelManager : MonoBehaviour
         string nextSceneName = allData.levels[currentLevelIndex].sceneName;
         Debug.Log($"[LevelManager] Switching to next scene #{currentLevelIndex}: {nextSceneName}.");
         SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
+    }
+
+    public void EnableBlackScreen()
+    {
+        blackScreenOverlay.enabled = true;
     }
 
     /// <summary>WARNING: Very slow, do not call frequently!</summary>

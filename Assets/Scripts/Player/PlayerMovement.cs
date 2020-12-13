@@ -37,7 +37,6 @@ public class PlayerMovement : MonoBehaviour {
     private bool readyToJump = true;
     private float jumpCooldown = 0.25f;
     public float jumpForce = 550f;
-    public float videoProbability = 0.0f;
     
     //Input
     float x, y;
@@ -147,8 +146,7 @@ public class PlayerMovement : MonoBehaviour {
     private void Jump() {
         if (grounded && readyToJump) {
             //randomly play a video
-            if (Util.DoWeHaveBadLuck(videoProbability))
-                GetComponent<PlayVideo>().Play();
+            GetComponent<PlayVideo>().PlayIfUnlucky();
 
             readyToJump = false;
 

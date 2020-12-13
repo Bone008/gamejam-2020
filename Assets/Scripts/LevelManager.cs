@@ -12,6 +12,8 @@ using UnityEngine.UI;
 public class LevelManager : MonoBehaviour
 {
     private static int currentLevelIndex = -1;
+    private static int lastPlayedIntroIndex = -1;
+    private static bool hardcoreMode = false;
 
     public AllLevelsData allData;
     public GrapplingGun grapplingScript;
@@ -57,6 +59,18 @@ public class LevelManager : MonoBehaviour
                 Debug.LogWarning($"[LevelManager] WEIRD THING WARNING: This is level index {currentLevelIndex}, but we are in scene {sceneName}, instead of expected scene {levelData}!");
         }
 
+        if(hardcoreMode)
+        {
+            levelData = new LevelInfo
+            {
+                brokenGrapplingHook = true,
+                brokenPathHints = true,
+                corruption = CorruptionLevel.Annoying,
+                optionalEntranceSpeech = levelData.optionalEntranceSpeech,
+                optionalFinishSpeech = levelData.optionalFinishSpeech,
+            };
+        }
+
         InitializeLevel();
     }
 
@@ -86,7 +100,11 @@ public class LevelManager : MonoBehaviour
                 break;
         }
 
-        SpeechManager.Instance.PlaySpecificClip(levelData.optionalEntranceSpeech);
+        if (currentLevelIndex != lastPlayedIntroIndex)
+        {
+            SpeechManager.Instance.PlaySpecificClip(levelData.optionalEntranceSpeech);
+            lastPlayedIntroIndex = currentLevelIndex;
+        }
     }
 
     void Update()
@@ -112,7 +130,8 @@ public class LevelManager : MonoBehaviour
         if (currentLevelIndex >= allData.levels.Length - 1)
         {
             Debug.LogWarning("[LevelManager] Reached final level, starting from the beginning.");
-            currentLevelIndex = -1;
+            currentLevelIndex = 0; // moves to index 1
+            hardcoreMode = true;
         }
         else if (currentLevelIndex < 0)
         {

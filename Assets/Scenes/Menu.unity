@@ -1000,7 +1000,6 @@ GameObject:
   m_Component:
   - component: {fileID: 805125420}
   - component: {fileID: 805125419}
-  - component: {fileID: 805125418}
   m_Layer: 9
   m_Name: AR-Goggles
   m_TagString: Untagged
@@ -1008,28 +1007,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &805125418
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 805125417}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39382d642146f834e9a1772db3f36457, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hudGameObject: {fileID: 0}
-  hideExitMechanism: {fileID: 0}
-  postProcessing: {fileID: 0}
-  stuffToDisableOnPickup:
-  - {fileID: 0}
-  stuffToEnableForAR:
-  - {fileID: 0}
-  uiImageToMakeHologram: {fileID: 0}
-  hologramMaterial: {fileID: 2100000, guid: bf131aacaceac2f4bbf4bc6b6c80b4df, type: 2}
-  initializingHud: {fileID: 0}
 --- !u!135 &805125419
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1570,10 +1547,10 @@ RectTransform:
   m_Father: {fileID: 1879847277}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000022888, y: 332}
-  m_SizeDelta: {x: 748.9145, y: 200.67346}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 332}
+  m_SizeDelta: {x: 0, y: 200.67346}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1593958150
 MonoBehaviour:
@@ -1607,7 +1584,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: AISCHE
+  m_Text: AISCHE OS
 --- !u!222 &1593958151
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -106,8 +106,7 @@ MonoBehaviour:
     brokenGrapplingHook: 0
     brokenPathHints: 0
     corruption: 2
-    optionalEntranceSpeech: {fileID: 8300000, guid: 7d110afa6fdd92c43bb6dea3481626fa,
-      type: 3}
+    optionalEntranceSpeech: {fileID: 0}
     optionalFinishSpeech: {fileID: 0}
     comment: the ultimate troll
   enableForcedConfigForEditor: 0

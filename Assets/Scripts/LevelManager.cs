@@ -17,6 +17,7 @@ public class LevelManager : MonoBehaviour
     public GrapplingGun grapplingScript;
     public PlayVideo playVideoScript;
     public InfoCardController infoCardScript;
+    public bool thisIsLevel0;
 
     public Image blackScreenOverlay;
 
@@ -30,24 +31,28 @@ public class LevelManager : MonoBehaviour
 
     void Awake()
     {
+        string sceneName = SceneManager.GetActiveScene().name;
         if (allData.enableForcedConfigForEditor && Application.isEditor)
         {
             Debug.LogWarning("[LevelManager] Using settings from 'forced config for editor'. Use this for debugging only and do NOT check it in!");
             levelData = allData.forcedConfigForEditor;
         }
+        else if (thisIsLevel0)
+        {
+            Debug.Log("[LevelManager] This is level 0, so we are starting our level config journey here!");
+            currentLevelIndex = 0;
+            levelData = allData.levels[0];
+        }
         else if (currentLevelIndex < 0)
         {
-            Debug.Log("[LevelManager] Apparently starting level out of context. This is fine. Skipping initialization.");
-            levelData = new LevelInfo();
-            return;
-            //levelData = allData.levels.First(level => level.sceneName == sceneName);
-            //currentLevelIndex = Array.IndexOf(allData.levels, levelData);
-            //Debug.Log("[LevelManager] Found configuration #" + currentLevelIndex);
+            Debug.Log("[LevelManager] Apparently starting level out of context. This is fine. Looking for first time this scene appears in the config.");
+            levelData = allData.levels.First(level => level.sceneName == sceneName);
+            currentLevelIndex = Array.IndexOf(allData.levels, levelData);
+            Debug.Log("[LevelManager] Found configuration #" + currentLevelIndex);
         }
         else
         {
             levelData = allData.levels[currentLevelIndex];
-            string sceneName = SceneManager.GetActiveScene().name;
             if (levelData.sceneName != sceneName)
                 Debug.LogWarning($"[LevelManager] WEIRD THING WARNING: This is level index {currentLevelIndex}, but we are in scene {sceneName}, instead of expected scene {levelData}!");
         }
@@ -100,12 +105,6 @@ public class LevelManager : MonoBehaviour
         }
         // Equivalent for now, might change decision.
         areVisualHintsVisible = !isGlobalGlitchHappening && !levelData.brokenPathHints;
-    }
-
-    public void LoadFirstLevel()
-    {
-        currentLevelIndex = -1;
-        LoadNextLevel(); // Will load level 0.
     }
 
     public void LoadNextLevel()

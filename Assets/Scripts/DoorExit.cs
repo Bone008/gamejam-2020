@@ -4,11 +4,9 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 
-//[RequireComponent(typeof(AudioSource))]
-
-public class TriggerDoor : MonoBehaviour
+[RequireComponent(typeof(AudioSource))]
+public class DoorExit : MonoBehaviour
 {
-    public string nextSceneName;
     public float delayAfterAudio;
 
     IEnumerator OnTriggerEnter(Collider doorInformation)
@@ -18,11 +16,8 @@ public class TriggerDoor : MonoBehaviour
             Debug.Log("Collision Detected");
             AudioSource audio = GetComponent<AudioSource>();
             audio.Play();
-            if (!string.IsNullOrEmpty(nextSceneName))
-            {
-                yield return new WaitForSeconds(audio.clip.length + delayAfterAudio); // Wait for the audio to have finished
-                SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
-            }
+            yield return new WaitForSeconds(audio.clip.length + delayAfterAudio); // Wait for the audio to have finished
+            LevelManager.FindActiveInstance().LoadNextLevel();
         }
     }
 }

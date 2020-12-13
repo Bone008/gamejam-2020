@@ -101,7 +101,7 @@ public class InfoCardController : MonoBehaviour
             textLine1.text = "Switch";
             textLine2.text = inInteractionRange ? $"Press F to {(lever.isOn ? "de" : "")}activate." : "Step closer to press.";
         }
-        else if (target.TryGetComponent(out TriggerDoor door))
+        else if (target.TryGetComponent(out DoorExit door))
         {
             textLine1.text = "Exit door";
             textLine2.text = inInteractionRange ? "Just go inside already ..." : "This is where you need to go.";

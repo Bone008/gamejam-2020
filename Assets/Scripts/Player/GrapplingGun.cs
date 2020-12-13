@@ -21,17 +21,30 @@ public class GrapplingGun : MonoBehaviour {
     public AudioSource audioSource;
     public AudioClip successAudio;
     public AudioClip failAudio;
+    public AudioClip brokenAudio;
+    public bool corrupted;
+    private bool didBreak = true;
+    private float corruptedTimer;
 
     void Awake() {
         lr = GetComponent<LineRenderer>();
     }
 
     void Update() {
-        if (Input.GetMouseButtonDown(0)) {
+        if (IsGrappling() && corrupted)
+            corruptedTimer -= Time.deltaTime;
+
+        if (Input.GetMouseButtonDown(0)) 
             StartGrapple();
-        }
-        else if (Input.GetMouseButtonUp(0)) {
+        else if (Input.GetMouseButtonUp(0))
+        {
             StopGrapple();
+        }
+        else if (!didBreak && corruptedTimer <= 0.0f)
+        {
+            didBreak = true;
+            StopGrapple();
+            audioSource.PlayOneShot(brokenAudio);
         }
     }
 
@@ -73,6 +86,12 @@ public class GrapplingGun : MonoBehaviour {
 
             lr.positionCount = 2;
             currentGrapplePosition = gunTip.position;
+
+            if (corrupted)
+            {
+                corruptedTimer = 1.0f;
+                didBreak = false;
+            }
 
             audioSource.PlayOneShot(successAudio);
         }

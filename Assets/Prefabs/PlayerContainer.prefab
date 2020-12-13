@@ -910,6 +910,8 @@ MonoBehaviour:
   audioSource: {fileID: 393477524}
   successAudio: {fileID: 8300000, guid: 6452a6ce42758f84eaace3f6c6b8b58b, type: 3}
   failAudio: {fileID: 8300000, guid: 9f1b1abb64aa65447b0197d40795c835, type: 3}
+  brokenAudio: {fileID: 8300000, guid: b36a60aad4aa0dd42b96b9a9cfc8b1ef, type: 3}
+  corrupted: 0
 --- !u!120 &2223799619992103593
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1182,7 +1184,7 @@ MonoBehaviour:
   playerCam: {fileID: 2223799618744909792}
   orientation: {fileID: 2223799619071576993}
   moveSpeed: 4500
-  maxSpeed: 11
+  maxSpeed: 15
   grounded: 0
   whatIsGround:
     serializedVersion: 2

@@ -25,6 +25,8 @@ public class InfoCardController : MonoBehaviour
         ("immortable object", "at least as far as i know"),
     };
 
+    public Sprite[] images;
+
     public float showTime = 0.4f;
     public RectTransform connectorLine;
     public RectTransform infoPanel;
@@ -33,8 +35,6 @@ public class InfoCardController : MonoBehaviour
     // For corruption
     public RectTransform crosshairTransform;
     public float softCorruptionProbability;
-
-    /// <summary>note: effect not implemented yet</summary>
     public float hardCorruptionProbability;
 
     private bool isOpen = false;
@@ -125,9 +125,15 @@ public class InfoCardController : MonoBehaviour
 
     private void UpdateText(GameObject target, bool inInteractionRange)
     {
+        infoPanel.transform.GetChild(2).gameObject.SetActive(false);
+        infoPanel.sizeDelta = new Vector2(300, 100);
         if (Util.DoWeHaveBadLuck(softCorruptionProbability))
         {
             UpdateCorruptedText();
+        }
+        if (Util.DoWeHaveBadLuck(hardCorruptionProbability))
+        {
+            UpdateCorruptedImages();
         }
         else if (target.TryGetComponent(out FollowPath followPath))
         {
@@ -173,5 +179,13 @@ public class InfoCardController : MonoBehaviour
         var (line1, line2) = Util.PickRandomElement(corruptedTextStrings);
         textLine1.text = line1;
         textLine2.text = line2;
+    }
+
+    private void UpdateCorruptedImages()
+    {
+        infoPanel.sizeDelta = new Vector2(400, 300);
+        Transform img = infoPanel.transform.GetChild(2);
+        img.GetComponent<Image>().sprite = Util.PickRandomElement(images);
+        img.gameObject.SetActive(true);
     }
 }

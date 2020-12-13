@@ -147,8 +147,8 @@ public class PlayerMovement : MonoBehaviour {
     private void Jump() {
         if (grounded && readyToJump) {
             //randomly play a video
-            float rnd = UnityEngine.Random.Range(0f, 1f);
-            if (rnd < videoProbability) this.GetComponent<PlayVideo>().Play();
+            if (Util.DoWeHaveBadLuck(videoProbability))
+                GetComponent<PlayVideo>().Play();
 
             readyToJump = false;
 

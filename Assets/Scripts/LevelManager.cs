@@ -14,13 +14,19 @@ public class LevelManager : MonoBehaviour
 
     public AllLevelsData allData;
     public GrapplingGun grapplingScript;
+    public PlayerMovement playerMovementScript;
+    public InfoCardController infoCardScript;
 
     private LevelInfo levelData;
 
     void Awake()
     {
-        string sceneName = SceneManager.GetActiveScene().name;
-        if (currentLevelIndex < 0)
+        if(allData.enableForcedConfigForEditor && Application.isEditor)
+        {
+            Debug.Log("[LevelManager] Using settings from 'forced config for editor'. Use this for debugging only and do NOT check it in!");
+            levelData = allData.forcedConfigForEditor;
+        }
+        else if (currentLevelIndex < 0)
         {
             Debug.Log("[LevelManager] Apparently starting level out of context. This is fine. Skipping initialization.");
             return;
@@ -31,6 +37,7 @@ public class LevelManager : MonoBehaviour
         else
         {
             levelData = allData.levels[currentLevelIndex];
+            string sceneName = SceneManager.GetActiveScene().name;
             if (levelData.sceneName != sceneName)
                 Debug.LogWarning($"[LevelManager] WEIRD THING WARNING: This is level index {currentLevelIndex}, but we are in scene {sceneName}, instead of expected scene {levelData}!");
         }
@@ -40,7 +47,27 @@ public class LevelManager : MonoBehaviour
 
     private void InitializeLevel()
     {
+        Debug.Log($"[LevelManager] Config: brokenGrapple={levelData.brokenGrapplingHook}, corruption={levelData.corruption}");
+
         grapplingScript.corrupted = levelData.brokenGrapplingHook;
+        switch(levelData.corruption)
+        {
+            case CorruptionLevel.None:
+                playerMovementScript.videoProbability = 0f;
+                infoCardScript.softCorruptionProbability = 0f;
+                infoCardScript.hardCorruptionProbability = 0f;
+                break;
+            case CorruptionLevel.Low:
+                playerMovementScript.videoProbability = 0.08f;
+                infoCardScript.softCorruptionProbability = 0.25f;
+                infoCardScript.hardCorruptionProbability = 0.01f;
+                break;
+            case CorruptionLevel.Annoying:
+                playerMovementScript.videoProbability = 0.2f;
+                infoCardScript.softCorruptionProbability = 0.9f;
+                infoCardScript.hardCorruptionProbability = 0.4f;
+                break;
+        }
     }
 
     public void LoadFirstLevel()

@@ -38,3 +38,10 @@ MonoBehaviour:
     corruption: 1
     optionalEntranceSpeech: {fileID: 0}
     optionalFinishSpeech: {fileID: 0}
+  enableForcedConfigForEditor: 0
+  forcedConfigForEditor:
+    sceneName: 
+    brokenGrapplingHook: 1
+    corruption: 2
+    optionalEntranceSpeech: {fileID: 0}
+    optionalFinishSpeech: {fileID: 0}

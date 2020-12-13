@@ -47,7 +47,6 @@ public class Interaction : MonoBehaviour
     {
         if (currentTarget == newTarget) return;
         currentTarget = newTarget;
-        Debug.Log("Now targeting: " + currentTarget, this);
 
         infoCard.SetTarget(currentTarget, inInteractionRange);
     }

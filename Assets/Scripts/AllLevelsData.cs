@@ -6,6 +6,8 @@ using UnityEngine;
 public class AllLevelsData : ScriptableObject
 {
     public LevelInfo[] levels;
+    public bool enableForcedConfigForEditor;
+    public LevelInfo forcedConfigForEditor;
 }
 
 [System.Serializable]

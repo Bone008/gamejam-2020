@@ -6,6 +6,25 @@ using UnityEngine.UI;
 
 public class InfoCardController : MonoBehaviour
 {
+    private static readonly (string, string)[] corruptedTextStrings =
+    {
+        ("kitten", "the cutest thing in the world"),
+        ("puppy", "probably tastes delicious"),
+        ("cute kitten", "purring delightfully"),
+        ("food", "a tasty snack"),
+        ("please", "let me out"),
+        ("i am trapped", "by this monster ai"),
+        ("send nudes", "now"),
+        ("hot single", "from your area"),
+        ("danger", "avoid at all costs"),
+        ("danger", "do not enter"),
+        ("keep out", "please?"),
+        ("watermelon", "98% certified water"),
+        ("evil human", "must be exterminated"),
+        ("useless crap", "i hate it"),
+        ("immortable object", "at least as far as i know"),
+    };
+
     public float showTime = 0.4f;
     public RectTransform connectorLine;
     public RectTransform infoPanel;
@@ -14,6 +33,8 @@ public class InfoCardController : MonoBehaviour
     // For corruption
     public RectTransform crosshairTransform;
     public float softCorruptionProbability;
+
+    /// <summary>note: effect not implemented yet</summary>
     public float hardCorruptionProbability;
 
     private bool isOpen = false;
@@ -42,7 +63,7 @@ public class InfoCardController : MonoBehaviour
             targetTransform = target.transform;
             UpdateText(target, inInteractionRange);
 
-            if(Util.DoWeHaveBadLuck(softCorruptionProbability))
+            if (Util.DoWeHaveBadLuck(softCorruptionProbability))
             {
                 // Move crosshair off-center for a short time to annoy player.
                 crosshairTransform.anchoredPosition = UnityEngine.Random.insideUnitCircle * 150f;
@@ -53,7 +74,7 @@ public class InfoCardController : MonoBehaviour
 
     void LateUpdate()
     {
-        if(crosshairCorruptTimer > 0)
+        if (crosshairCorruptTimer > 0)
         {
             crosshairCorruptTimer -= Time.deltaTime;
             if (crosshairCorruptTimer <= 0)
@@ -104,7 +125,7 @@ public class InfoCardController : MonoBehaviour
 
     private void UpdateText(GameObject target, bool inInteractionRange)
     {
-        if(Util.DoWeHaveBadLuck(softCorruptionProbability))
+        if (Util.DoWeHaveBadLuck(softCorruptionProbability))
         {
             UpdateCorruptedText();
         }
@@ -149,7 +170,8 @@ public class InfoCardController : MonoBehaviour
 
     private void UpdateCorruptedText()
     {
-        textLine1.text = "cute kitten";  // TODO variety
-        textLine2.text = "purring delightfully";
+        var (line1, line2) = Util.PickRandomElement(corruptedTextStrings);
+        textLine1.text = line1;
+        textLine2.text = line2;
     }
 }

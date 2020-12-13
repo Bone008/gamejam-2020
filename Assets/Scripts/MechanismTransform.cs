@@ -42,7 +42,7 @@ public class MechanismTransform : MechanismBase
         }
 
         // Initially set progress to maximum/minimum depending on whether isTriggered is checked in the Editor.
-        transitionProgress = (isTriggerActive ? GetTotalDuration() : 0f);
+        transitionProgress = (isTriggerActive ? GetTotalDuration() : 0f) * 0.99f;
     }
 
     void FixedUpdate()

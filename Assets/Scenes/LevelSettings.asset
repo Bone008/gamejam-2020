@@ -76,6 +76,13 @@ MonoBehaviour:
     optionalEntranceSpeech: {fileID: 0}
     optionalFinishSpeech: {fileID: 0}
     comment: platforms-pro ohne visual aid
+  - sceneName: Level_Omega
+    brokenGrapplingHook: 0
+    brokenPathHints: 0
+    corruption: 2
+    optionalEntranceSpeech: {fileID: 0}
+    optionalFinishSpeech: {fileID: 0}
+    comment: the ultimate troll
   enableForcedConfigForEditor: 0
   forcedConfigForEditor:
     sceneName: 

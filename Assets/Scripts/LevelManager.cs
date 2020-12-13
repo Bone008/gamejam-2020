@@ -111,10 +111,10 @@ public class LevelManager : MonoBehaviour
     {
         if (currentLevelIndex >= allData.levels.Length - 1)
         {
-            Debug.LogWarning("[LevelManager] Attempted to load next level, but already at maximum.");
-            return;
+            Debug.LogWarning("[LevelManager] Reached final level, starting from the beginning.");
+            currentLevelIndex = -1;
         }
-        if (currentLevelIndex < 0)
+        else if (currentLevelIndex < 0)
         {
             Debug.LogWarning("[LevelManager] Now we would switch to the next level, but we loaded out of order, so skipping that.");
             return;

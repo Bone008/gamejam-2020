@@ -8,14 +8,23 @@ public class TriggerButton : MonoBehaviour
     public MechanismBase targetMechanism;
     public float activationDuration = 2f;
     public MechanismBase buttonFaceMechanism;
+    public AudioClip audioOn;
+    public AudioClip audioOff;
 
+    private AudioSource audioSource;
     private Coroutine resetCoroutine = null;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
 
     public void Activate()
     {
         Debug.Log($"Activating button for {activationDuration:0.#} s!", this);
         targetMechanism?.SetTriggerActive(true);
         buttonFaceMechanism.SetTriggerActive(true);
+        audioSource.PlayOneShot(audioOn);
         if (resetCoroutine != null)
         {
             StopCoroutine(resetCoroutine);
@@ -29,5 +38,6 @@ public class TriggerButton : MonoBehaviour
         Debug.Log("Deactivating button!", this);
         targetMechanism?.SetTriggerActive(false);
         buttonFaceMechanism.SetTriggerActive(false);
+        audioSource.PlayOneShot(audioOff);
     }
 }

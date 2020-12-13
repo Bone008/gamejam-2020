@@ -47,6 +47,7 @@ public class GrapplingGun : MonoBehaviour {
             didBreak = true;
             StopGrapple();
             audioSource.PlayOneShot(brokenAudio);
+            SpeechManager.Instance.PlayOnBrokenGrapple();
         }
     }
 
@@ -91,7 +92,7 @@ public class GrapplingGun : MonoBehaviour {
 
             if (corrupted)
             {
-                corruptedTimer = 1.0f;
+                corruptedTimer = 0.6f;
                 didBreak = false;
             }
 

@@ -12,12 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b289dbfec8dd04ebf370f002ccac25, type: 3}
   m_Name: LevelSettings
   m_EditorClassIdentifier: 
+  onDeathSpeeches:
+  - {fileID: 8300000, guid: 80cf02a5612809349a683487bae0e406, type: 3}
+  onBrokenGrappleSpeeches:
+  - {fileID: 8300000, guid: 80cf02a5612809349a683487bae0e406, type: 3}
+  onRandomVideoSpeeches:
+  - {fileID: 8300000, guid: 80cf02a5612809349a683487bae0e406, type: 3}
   levels:
   - sceneName: Level_0
     brokenGrapplingHook: 0
     brokenPathHints: 0
     corruption: 0
-    optionalEntranceSpeech: {fileID: 0}
+    optionalEntranceSpeech: {fileID: 8300000, guid: 80cf02a5612809349a683487bae0e406,
+      type: 3}
     optionalFinishSpeech: {fileID: 0}
     comment: putting on HMD
   - sceneName: Level_1
@@ -74,8 +81,9 @@ MonoBehaviour:
     sceneName: 
     brokenGrapplingHook: 1
     brokenPathHints: 1
-    corruption: 2
-    optionalEntranceSpeech: {fileID: 0}
+    corruption: 1
+    optionalEntranceSpeech: {fileID: 8300000, guid: 80cf02a5612809349a683487bae0e406,
+      type: 3}
     optionalFinishSpeech: {fileID: 0}
     comment: "ONLY FOR DEBUGGING!! If enabled,\nall levels that are started will
       use \nthese settings."

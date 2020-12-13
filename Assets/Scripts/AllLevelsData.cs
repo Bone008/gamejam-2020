@@ -5,6 +5,12 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Level Management", menuName = "AllLevelsData")]
 public class AllLevelsData : ScriptableObject
 {
+    [Header("Random speech clips")]
+    public AudioClip[] onDeathSpeeches;
+    public AudioClip[] onBrokenGrappleSpeeches;
+    public AudioClip[] onRandomVideoSpeeches;
+
+    [Header("Levels")]
     public LevelInfo[] levels;
     public bool enableForcedConfigForEditor;
     public LevelInfo forcedConfigForEditor;

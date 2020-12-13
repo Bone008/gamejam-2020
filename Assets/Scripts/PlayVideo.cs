@@ -65,6 +65,9 @@ public class PlayVideo : MonoBehaviour
         yield return new WaitForSeconds(delay);
         panel.SetActive(false);
         isPlaying = false;
+
+        // Play speech after video has finished playing.
+        SpeechManager.Instance.PlayOnRandomVideo();
     }
 
     public void Play()
@@ -76,7 +79,6 @@ public class PlayVideo : MonoBehaviour
         Debug.Log(clip.width + "x" + clip.height);
         arFrame.sizeDelta = new Vector2(20, arFrame.rect.size.x / clip.width * clip.height + 20);
         StartCoroutine(CoFunc(lengths[rnd]));
-        
     }
 
     public void PlayIfUnlucky()

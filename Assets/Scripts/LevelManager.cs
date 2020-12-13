@@ -32,12 +32,13 @@ public class LevelManager : MonoBehaviour
     {
         if (allData.enableForcedConfigForEditor && Application.isEditor)
         {
-            Debug.Log("[LevelManager] Using settings from 'forced config for editor'. Use this for debugging only and do NOT check it in!");
+            Debug.LogWarning("[LevelManager] Using settings from 'forced config for editor'. Use this for debugging only and do NOT check it in!");
             levelData = allData.forcedConfigForEditor;
         }
         else if (currentLevelIndex < 0)
         {
             Debug.Log("[LevelManager] Apparently starting level out of context. This is fine. Skipping initialization.");
+            levelData = new LevelInfo();
             return;
             //levelData = allData.levels.First(level => level.sceneName == sceneName);
             //currentLevelIndex = Array.IndexOf(allData.levels, levelData);
@@ -56,7 +57,7 @@ public class LevelManager : MonoBehaviour
 
     private void InitializeLevel()
     {
-        Debug.Log($"[LevelManager] Config: brokenGrapple={levelData.brokenGrapplingHook}, corruption={levelData.corruption}");
+        Debug.Log($"[LevelManager] Config: brokenGrapple={levelData.brokenGrapplingHook}, brokenPathHints={levelData.brokenPathHints}, corruption={levelData.corruption}");
 
         grapplingScript.corrupted = levelData.brokenGrapplingHook;
         switch (levelData.corruption)
@@ -79,6 +80,8 @@ public class LevelManager : MonoBehaviour
                 infoCardScript.hardCorruptionProbability = 0.4f;
                 break;
         }
+
+        SpeechManager.Instance.PlaySpecificClip(levelData.optionalEntranceSpeech);
     }
 
     void Update()
@@ -112,6 +115,11 @@ public class LevelManager : MonoBehaviour
             Debug.LogWarning("[LevelManager] Attempted to load next level, but already at maximum.");
             return;
         }
+        if (currentLevelIndex < 0)
+        {
+            Debug.LogWarning("[LevelManager] Now we would switch to the next level, but we loaded out of order, so skipping that.");
+            return;
+        }
 
         currentLevelIndex++;
         string nextSceneName = allData.levels[currentLevelIndex].sceneName;
@@ -119,8 +127,10 @@ public class LevelManager : MonoBehaviour
         SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);
     }
 
-    public void EnableBlackScreen()
+    public void OnPlayerWinLevel(out float extraWaitTime)
     {
+        extraWaitTime = levelData.optionalFinishSpeech ? levelData.optionalFinishSpeech.length : 0f;
+        SpeechManager.Instance.PlaySpecificClip(levelData.optionalFinishSpeech);
         blackScreenOverlay.enabled = true;
     }
 

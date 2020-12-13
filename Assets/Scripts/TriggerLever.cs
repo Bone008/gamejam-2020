@@ -7,16 +7,20 @@ public class TriggerLever : MonoBehaviour
 {
     public MechanismBase targetMechanism;
     public MechanismBase leverHandleMechanism;
-
+    public AudioClip audioOn;
+    public AudioClip audioOff;
     public bool isOn = false;
+
+    private AudioSource audioSource;
 
     void Start()
     {
-        // Toggle once in the beginning if the lever should start in the on state.
+        audioSource = GetComponent<AudioSource>();
+        // Toggle once (silently) in the beginning if the lever should start in the on state.
         if (isOn)
         {
-            isOn = false;
-            Activate();
+            targetMechanism?.SetTriggerActive(isOn);
+            leverHandleMechanism.SetTriggerActive(isOn);
         }
     }
 
@@ -25,5 +29,6 @@ public class TriggerLever : MonoBehaviour
         isOn = !isOn;
         targetMechanism?.SetTriggerActive(isOn);
         leverHandleMechanism.SetTriggerActive(isOn);
+        audioSource.PlayOneShot(isOn ? audioOn : audioOff);
     }
 }

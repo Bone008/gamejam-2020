@@ -806,6 +806,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   allData: {fileID: 11400000, guid: 23bc67be8cb98344cbdd478daa7d7c4e, type: 2}
+  grapplingScript: {fileID: 2223799619992103594}
 --- !u!1 &2223799619992103596
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
     private static int currentLevelIndex = -1;
 
     public AllLevelsData allData;
+    public GrapplingGun grapplingScript;
+
     private LevelInfo levelData;
 
     void Awake()
@@ -20,10 +22,11 @@ public class LevelManager : MonoBehaviour
         string sceneName = SceneManager.GetActiveScene().name;
         if (currentLevelIndex < 0)
         {
-            Debug.Log("[LevelManager] Apparently starting level out of context. This is fine. Choosing first available configuration.");
-            levelData = allData.levels.First(level => level.sceneName == sceneName);
-            currentLevelIndex = Array.IndexOf(allData.levels, levelData);
-            Debug.Log("[LevelManager] Found configuration #" + currentLevelIndex);
+            Debug.Log("[LevelManager] Apparently starting level out of context. This is fine. Skipping initialization.");
+            return;
+            //levelData = allData.levels.First(level => level.sceneName == sceneName);
+            //currentLevelIndex = Array.IndexOf(allData.levels, levelData);
+            //Debug.Log("[LevelManager] Found configuration #" + currentLevelIndex);
         }
         else
         {
@@ -31,6 +34,13 @@ public class LevelManager : MonoBehaviour
             if (levelData.sceneName != sceneName)
                 Debug.LogWarning($"[LevelManager] WEIRD THING WARNING: This is level index {currentLevelIndex}, but we are in scene {sceneName}, instead of expected scene {levelData}!");
         }
+
+        InitializeLevel();
+    }
+
+    private void InitializeLevel()
+    {
+        grapplingScript.corrupted = levelData.brokenGrapplingHook;
     }
 
     public void LoadFirstLevel()

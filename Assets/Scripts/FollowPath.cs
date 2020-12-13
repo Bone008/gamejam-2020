@@ -15,6 +15,7 @@ public class FollowPath : MonoBehaviour
     public bool isLooping = false;
     public bool initiallyTeleportToFirstWaypoint = true;
     public bool isTurning = false;
+    public bool isFollowEnabled = true;
 
     private int currentIndex = -1;
     private Transform currentWaypoint;
@@ -47,6 +48,8 @@ public class FollowPath : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (!isFollowEnabled) return;
+
         Vector3 currentGoal = currentWaypoint.position;
         transform.position = Vector3.MoveTowards(transform.position, currentGoal, Time.fixedDeltaTime * velocity);
 

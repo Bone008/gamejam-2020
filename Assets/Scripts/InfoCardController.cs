@@ -87,7 +87,9 @@ public class InfoCardController : MonoBehaviour
         if (target.TryGetComponent(out FollowPath followPath))
         {
             textLine1.text = "Platform";
-            textLine2.text = $"moving at {followPath.velocity:0.0} m/s";
+            textLine2.text = followPath.isFollowEnabled
+                ? $"moving at {followPath.velocity:0.0} m/s"
+                : "disabled";
         }
         else if (target.TryGetComponent(out TriggerButton button))
         {

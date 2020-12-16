@@ -2144,7 +2144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e4f7e70184d1727499222527f1ac3508, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: e4f7e70184d1727499222527f1ac3508, type: 3}
       propertyPath: m_LocalScale.x
@@ -3564,6 +3564,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: light_wall_2 (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1d91adeb4e5ba474aa18a7424a210d7c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 1d91adeb4e5ba474aa18a7424a210d7c, type: 3}
       propertyPath: m_RootOrder
       value: 33
@@ -3623,7 +3627,7 @@ PrefabInstance:
     - target: {fileID: 2300000, guid: 1d91adeb4e5ba474aa18a7424a210d7c, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: 493c2986c66fadd4c8fb6ab0a74154e3, type: 2}
+      objectReference: {fileID: 2100000, guid: ebaef9f76dcac9a4f9b97e78c20406d3, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d91adeb4e5ba474aa18a7424a210d7c, type: 3}
 --- !u!1001 &1188449364
@@ -5209,7 +5213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 206baf2e20f35044f927ec9ea215c222, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 206baf2e20f35044f927ec9ea215c222, type: 3}
       propertyPath: m_LocalScale.x

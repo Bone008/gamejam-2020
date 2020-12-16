@@ -135,13 +135,18 @@ public class LevelManager : MonoBehaviour
         areVisualHintsVisible = !isGlobalGlitchHappening && !levelData.brokenPathHints;
     }
 
-    public void LoadNextLevel()
+    public void LoadNextLevel(bool goBackwards = false)
     {
-        if (currentLevelIndex >= allData.levels.Length - 1)
+        if (!goBackwards && currentLevelIndex >= allData.levels.Length - 1)
         {
             Debug.LogWarning("[LevelManager] Reached final level, starting from the beginning.");
             currentLevelIndex = 0; // moves to index 1
             hardcoreMode = true;
+        }
+        else if(goBackwards && currentLevelIndex == 0)
+        {
+            // Do nothing.
+            return;
         }
         else if (currentLevelIndex < 0)
         {
@@ -149,7 +154,7 @@ public class LevelManager : MonoBehaviour
             return;
         }
 
-        currentLevelIndex++;
+        currentLevelIndex += (goBackwards ? -1 : 1);
         string nextSceneName = allData.levels[currentLevelIndex].sceneName;
         Debug.Log($"[LevelManager] Switching to next scene #{currentLevelIndex}: {nextSceneName}.");
         SceneManager.LoadScene(nextSceneName, LoadSceneMode.Single);

@@ -32,13 +32,15 @@ public class TrollEnding : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         video.SetDirectAudioVolume(0, 0.35f);
         yield return new WaitForSeconds(0.3f);
-        video.SetDirectAudioVolume(0, 0.2f);
+        video.SetDirectAudioVolume(0, 0.0f);
 
         SpeechManager.Instance.PlaySpecificClip(trollSpeech);
         yield return new WaitForSeconds(trollSpeech.length);
 
 
-        video.SetDirectAudioVolume(0, 0.35f);
+        video.SetDirectAudioVolume(0, 0.1f);
+        yield return new WaitForSeconds(0.3f);
+        video.SetDirectAudioVolume(0, 0.25f);
         yield return new WaitForSeconds(0.3f);
         video.SetDirectAudioVolume(0, 0.5f);
         yield return new WaitForSeconds(0.3f);

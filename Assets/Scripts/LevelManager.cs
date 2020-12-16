@@ -15,6 +15,16 @@ public class LevelManager : MonoBehaviour
     private static int lastPlayedIntroIndex = -1;
     private static bool hardcoreMode = false;
 
+    public static void ExitToMainMenu()
+    {
+        currentLevelIndex = -1;
+        lastPlayedIntroIndex = -1;
+        hardcoreMode = false;
+        Cursor.lockState = CursorLockMode.None;
+        SpeechManager.Instance.StopSpeech();
+        SceneManager.LoadScene(0, LoadSceneMode.Single);
+    }
+
     public AllLevelsData allData;
     public GrapplingGun grapplingScript;
     public PlayVideo playVideoScript;

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -56,6 +57,11 @@ public class SpeechManager : MonoBehaviour
         // Skip if already playing, not so important.
         if (source.isPlaying || allData.onRandomVideoSpeeches.Length == 0) return;
         source.PlayOneShot(Util.PickRandomElement(allData.onRandomVideoSpeeches));
+    }
+
+    public void StopSpeech()
+    {
+        source.Stop();
     }
 
 }

@@ -90,13 +90,13 @@ public class LevelManager : MonoBehaviour
                 globalGlitchCooldown = 1f; // start the glitches by setting >0
                 playVideoScript.videoProbability = 0.1f;
                 infoCardScript.softCorruptionProbability = 0.25f;
-                infoCardScript.hardCorruptionProbability = 0.01f;
+                infoCardScript.hardCorruptionProbability = 0.08f;
                 break;
             case CorruptionLevel.Annoying:
                 globalGlitchCooldown = 1f; // start the glitches by setting >0
                 playVideoScript.videoProbability = 0.2f;
                 infoCardScript.softCorruptionProbability = 0.9f;
-                infoCardScript.hardCorruptionProbability = 0.4f;
+                infoCardScript.hardCorruptionProbability = 0.25f;
                 break;
         }
 

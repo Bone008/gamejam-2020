@@ -18,7 +18,7 @@ public class InfoCardController : MonoBehaviour
         ("hot single", "from your area"),
         ("danger", "avoid at all costs"),
         ("danger", "do not enter"),
-        ("keep out", "please?"),
+        ("keep out", "please"),
         ("watermelon", "98% certified water"),
         ("evil human", "must be exterminated"),
         ("useless crap", "i hate it"),
@@ -63,7 +63,7 @@ public class InfoCardController : MonoBehaviour
             targetTransform = target.transform;
             UpdateText(target, inInteractionRange);
 
-            if (Util.DoWeHaveBadLuck(softCorruptionProbability))
+            if (Util.DoWeHaveBadLuck(hardCorruptionProbability))
             {
                 // Move crosshair off-center for a short time to annoy player.
                 crosshairTransform.anchoredPosition = UnityEngine.Random.insideUnitCircle * 150f;
@@ -127,13 +127,13 @@ public class InfoCardController : MonoBehaviour
     {
         infoPanel.transform.GetChild(2).gameObject.SetActive(false);
         infoPanel.sizeDelta = new Vector2(300, 100);
-        if (Util.DoWeHaveBadLuck(softCorruptionProbability))
-        {
-            UpdateCorruptedText();
-        }
         if (Util.DoWeHaveBadLuck(hardCorruptionProbability))
         {
             UpdateCorruptedImages();
+        }
+        else if (Util.DoWeHaveBadLuck(softCorruptionProbability))
+        {
+            UpdateCorruptedText();
         }
         else if (target.TryGetComponent(out FollowPath followPath))
         {
